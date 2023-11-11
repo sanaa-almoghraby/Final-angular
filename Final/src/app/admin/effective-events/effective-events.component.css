@@ -1,0 +1,17 @@
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+
+  label {
+    width: 100px;
+  }
+  
+  .form-control {
+    flex: 1;
+  }
+  .bold-label {
+    font-weight: bold;
+  }

@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main id="main" class="main  bootdey.com">
+
+
+    <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-blue rounded box-shadow">
+      <img class="mr-3 avatar" src="assets/Images/Users/{{user?.image}}" alt="" >
+      <div class="lh-100">
+        <h3 class="mb-0 text-white lh-100">{{user?.username}}</h3>
+        <small>Messages</small>
+      </div>
+    </div>
+  
+    <div class="my-3 p-3 bg-white rounded box-shadow">
+      <h3 class="border-bottom border-gray pb-2 mb-0">Messages</h3>
+
+
+      <div class="media text-muted pt-3" *ngFor="let obj of admin.contact">
+        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">        
+          <h4 class="d-block text-gray-dark">{{obj?.text1}}</h4>
+          <p style = "font-size: small;"><a class="mail" href="mailto:{{obj?.email}}" style="text-decoration: none;">{{obj?.email}}</a></p>
+          <p style = "font-size: small;">{{obj?.message}}</p>
+        </div>
+      </div>     
+    </div>
+  
+
+</main>

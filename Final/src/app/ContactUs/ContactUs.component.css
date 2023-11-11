@@ -1,0 +1,9 @@
+.colorbut{
+    border: 1px solid var(--primary-color) !important;
+      border-radius: var(--border-radius);
+      font-weight: 70;
+      background: var(--primary-color) !important ;}
+
+.co{
+    color:var(--primary-color) !important;
+}

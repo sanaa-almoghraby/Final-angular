@@ -1,0 +1,98 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+
+<main id="main" class="main">
+
+  <div class="card">
+
+    <div class="card-body">
+      <h1>Services</h1>
+      <br>
+      <button id="bt" (click)="openCreateSer()" class="btn btn-primary m-1" ><i class="bi bi-plus-circle"></i> Create New Services</button>
+
+      <!-- Table with stripped rows     -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+
+            <th scope="col">Image</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Oprition</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+        
+          <tr *ngFor="let opj of admin.ServicesData">
+            <td>
+              <img src="assets/Images/Icons/{{opj.image}}" width="100px" height="80px" style="border-radius: 20px;"
+              alt="image">
+            </td>
+            <td  id="td">{{opj.textt}}</td>
+            <td  id="td">{{opj.textd}}</td>
+            <td >
+              <!-- <button class="btn btn-primary m-1"(click)="OpenDetailsCat(c.categoryid)"><i class="bi bi-info-circle"></i></button> -->
+              <button class="btn btn-danger m-1"(click)="openDeleteSer(opj.servicesid)"><i class="bi bi-trash3"></i></button>
+              <button class="btn btn-primary m-1"(click)="OPenUpdateSer(opj)"><i class="bi bi-pencil-square"></i></button>
+            </td>
+            <ng-template #callDeleteDailog>
+              <h1 mat-dialog-title>Delete Services</h1>
+              <div mat-dialog-content>Are you sure you went to delete this item ?</div>
+              <div mat-dialog-actions>
+                <button mat-button mat-dialog-close="yes">Yes</button>
+                <button mat-button mat-dialog-close="no">No</button>
+              </div>
+            </ng-template>
+
+
+          </tr>
+        </tbody>
+      </table>
+      <!-- End Table with stripped rows -->
+
+    </div>
+  </div>
+
+
+<!-- call details dialog -->
+<ng-template #callDetailsCat>
+  <!-- <h4 mat-dialog-title>Category Name is: {{P_Data.name}} </h4>
+  <h4 mat-dialog-title>Category price is: {{P_Data.price}} </h4> -->
+  <!-- <div mat-dialog-content><img src="../../../assets/Images/Category/{{P_Data.image}}" width="100px"
+      style="border-radius: 20px;" alt="image"></div> -->
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close="no">OK</button>
+  </div>
+</ng-template>
+
+<ng-template #callUpdateSer>
+
+  <h2 mat-dialog-title>Update Services</h2>
+  <mat-dialog-content class="mat-typography">
+   
+    <form  [formGroup]="updateForm" class="example-form">
+
+      <input type="file" #file formControlName="image" (change)="uploadImg(file.files)" [(ngModel)]="p_data.image">
+     <br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Services Title {{p_data.textt}}</mat-label>
+        <input type="text" matInput formControlName="textt" [(ngModel)]="p_data.textt">
+      </mat-form-field>
+      <br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Services Description{{p_data.textd}}</mat-label>
+        <input type="text" matInput formControlName="textd" [(ngModel)]="p_data.textd">
+      </mat-form-field>
+
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updatedSer()">Update</button>
+  </mat-dialog-actions>
+
+
+</ng-template>

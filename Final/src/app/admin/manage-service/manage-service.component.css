@@ -1,0 +1,87 @@
+/*.colorbut {
+    border: 1px solid var(--primary-color) !important;
+    border-radius: var(--border-radius);
+    font-weight: 70;
+    background: var(--primary-color) !important;
+}
+#td{
+    font-size: 20px;
+    padding-top: 40px;
+}
+#bt{
+    float: right;
+}*/
+#bt{
+  float: right;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+#main {
+  padding: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card-body {
+  margin-top: -30px;
+
+  margin-bottom: 10px;
+}
+
+.btn {
+  border-radius: 5px;
+}
+
+#bt {
+  margin-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.table th {
+  font-weight: bold;
+  font-size: 17px !important;
+}
+
+.table td, .table th {
+  padding: 8px;
+  vertical-align: middle;
+}
+
+#td {
+  vertical-align: middle;
+  font-weight: 400;
+  font-size: 16px !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.mat-dialog-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.mat-dialog-content {
+  margin-bottom: 15px;
+}
+
+.mat-dialog-actions {
+  text-align: right;
+}
+
+.mat-dialog-actions button {
+  margin-left: 10px;
+}

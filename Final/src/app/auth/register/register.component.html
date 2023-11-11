@@ -1,0 +1,91 @@
+<app-nav></app-nav>
+<section class="w3l-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-5">
+        <div class="container pt-lg-5 pt-3 p-lg-4 pb-3">
+            <h2 class="title mt-5 pt-lg-5 pt-sm-3">Signup / Registration page</h2>
+            <ul class="breadcrumbs-custom-path pb-sm-5 pb-4 mt-2 text-center mb-md-5">
+                <li><a href="index.html">Home</a></li>
+                <li class="active"> / Signup </li>
+            </ul>
+        </div>
+    </div>
+    <div class="waveWrapper waveAnimation">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+            <path d="M-5.07,73.52 C149.99,150.00 299.66,-102.13 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none;"></path>
+        </svg>
+    </div>
+</section>
+<!-- //about breadcrumb -->
+<section class="w3l-loginblock pb-5" id="contact">
+    <div class="contacts-9 pb-lg-5 pb-md-4">
+        <div class="container">
+            <div class="top-map">
+                <div class="map-content-9">
+                    <form [formGroup]="createUser">
+                        <div class="form-grid signupgrids">
+                            <div class="input-field">
+                                <label> Full Name * </label>
+                                <input type="text" formControlName="fullname" placeholder="Full Name" required="" maxlength="50">
+                                 
+                                <span *ngIf="createUser.controls['fullname'].hasError('required') && 
+                                createUser.controls['fullname']?.touched" class="text-danger">FullName is Required</span>             
+                            </div>
+                            <div class="input-field">   
+                                <label> User Name *</label>
+                                <input type="text" (change)="checkuser()" formControlName="username"  placeholder="User Name" required="" maxlength="12">
+                                <span *ngIf="createUser.controls['username'].hasError('invalidUsername')" class="text-danger">Existe UserName</span>
+                                <span *ngIf="createUser.controls['username'].hasError('required') && 
+                                createUser.controls['username']?.touched" class="text-danger">UserName is Required</span> 
+                               
+                            </div>
+                            <div class="input-field">
+                                <label> Phone number *</label>
+                                <input type="text" formControlName="phone" placeholder="Phone number" required="" maxlength="10">
+                                <span *ngIf="createUser.controls['phone'].hasError('required') && 
+                                createUser.controls['phone']?.touched" class="text-danger">Phone Number is Required</span> 
+                            </div>
+                            <div class="input-field">
+                                <label>  Email * </label>
+                                <input type="email" (change)="checkemail()" formControlName="email"  placeholder="Email" required="">
+                                <span *ngIf="createUser.controls['email'].hasError('required') && 
+                                createUser.controls['email']?.touched" class="text-danger">Email is Required</span> 
+                                <span *ngIf="createUser.controls['email'].hasError('invalidEmail')" class="text-danger">Existe Email</span>
+                                <span *ngIf="createUser.controls['email'].hasError('email')" class="text-danger">Please Enter Valid Email</span>
+                            </div>
+                            <div class="input-field">   
+                                <label> Password *</label>
+                                <input (change)="matchPassword()"  type="password"   formControlName="password" placeholder="********"/>
+                                <span *ngIf="createUser.controls['password'].hasError('minlength')" class="text-danger">Please Enter Strong Password</span>
+                                <span *ngIf="createUser.controls['password'].hasError('required') && 
+                                createUser.controls['password']?.touched" class="text-danger">Password is Required</span>
+                            </div>
+                            <div class="input-field">
+                                <label> Confirm Password *</label>
+                                <input (change)="matchPassword()" type="password"  formControlName="confirmpassword"   placeholder="Confirm Password">
+                                <span *ngIf="createUser.controls['confirmpassword'].hasError('missMatch')" class="text-danger">Not Match Password</span>
+                                <span *ngIf="createUser.controls['confirmpassword'].hasError('required') && 
+                                createUser.controls['confirmpassword']?.touched" class="text-danger">Confirm Password is Required</span>
+                            </div>
+                            <div >
+                                <label> Gender *</label>
+                                <!-- <mat-radio-group aria-label="Select an option" formControlName="gender"  style="margin-top: 7px !important;">
+                                    <mat-radio-button value="male" >Male</mat-radio-button>
+                                    <mat-radio-button value="female">Female</mat-radio-button>
+                                    <mat-radio-button value="other">Other</mat-radio-button>
+                                  </mat-radio-group><br> -->
+
+                                  <mat-radio-group formControlName="gender" name="radioOpt1" [(ngModel)]="selectedRadio"  >
+                                        <mat-radio-button value="male" >Male</mat-radio-button>
+                                        <mat-radio-button value="female">Female</mat-radio-button>
+                                  </mat-radio-group> 
+                                  <span *ngIf="createUser.controls['gender'].hasError('required')" class="text-danger">gender is Required</span>
+                              </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-style mt-4 colorbut" [disabled]="!createUser.valid" (click)="CreateUser()">Signup / Regiser now </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

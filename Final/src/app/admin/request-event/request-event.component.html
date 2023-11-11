@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Table Requestes Events</h4>
+      <table class="table table-striped custom-table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Description</th>
+           
+            <th scope="col">Category</th>
+            <th scope="col" colSpan= "2">Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="checkdata" > <td class="centered-column" colspan="8" style="text-align: center;">No Requestes</td></tr>
+          <tr *ngFor="let e of admin.events">
+            <td>{{e.name}}</td>
+            <td>{{e.startdate | date :'shortDate'}}</td>
+            <td>{{e.enddate | date :'shortDate'}}</td>
+            
+            <td>{{e.phone}}</td>
+            <td>{{e.description}}</td>
+           
+            
+            <td>{{findcategory(e.categoryid)?.name}}</td>
+            <td colSpan="2">
+              <ng-container *ngIf="e.isaccepted === 1">
+                <button class="btn btn-danger m-1" (click)="updateIsAccepted(e,0)"><i class="bi bi-x-circle"></i> </button>
+                <button class="btn btn-primary m-1" (click)="updateIsAccepted(e,2)"><i class="bi bi-check2-circle"></i></button>
+              </ng-container> 
+              <span *ngIf="e.isaccepted === 2 && e.ispayed == 0" class="ms-2" style="color:green">Accepted but not Paid</span>
+              <span *ngIf="e.isaccepted === 0" class="ms-2" style="color:red">Rejected</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>

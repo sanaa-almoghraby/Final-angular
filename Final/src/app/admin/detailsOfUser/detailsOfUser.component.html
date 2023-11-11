@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+
+
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usersactive">
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.gender }}</td>
+            <td>
+              <img src="../../../assets/Images/Users/{{ user.image }}"  style="width: 100px; height: 60px; border-radius: 20px;" alt="image">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #callDelateDailog>
+    <h1 mat-dialog-title>Delete Homepage</h1>
+    <div mat-dialog-content>Are you sure you want to delete this item?</div>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close="yes">Yes</button>
+      <button mat-button mat-dialog-close="no">No</button>
+    </div>
+  </ng-template>
+</main>
+
+
+
+ 
+
+   
+
+   
+
+  

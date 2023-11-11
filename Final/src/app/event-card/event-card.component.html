@@ -1,0 +1,39 @@
+<div class="card" >
+    <div class="card-header p-0 position-relative">
+        <a (click)="showInfo()" class="zoom d-block">
+            <img class="card-img-bottom d-block" src="assets/Images/Events/{{event?.image}}"
+              alt="Card image cap" style = "height: 300px !important; width: 100 !important;">
+        </a>
+        <div class="post-pos">
+            <a style="text-decoration: none;" class="receipe blue">{{categoryname}}</a>
+        </div>
+    </div>
+    <div class="card-body course-details">
+        <a  class="course-desc">{{event.name}}
+        </a>
+        <div class="course-meta mt-4">
+            <div class="meta-item course-lesson">
+                <span class="fa fa-clock-o"></span>
+                <span class="meta-value"> start Date : {{event.startdate | date:'short'}} </span>
+            </div>
+            <div class="meta-item course-lesson">
+                <span class="fa fa-clock-o"></span>
+                <span class="meta-value"> End Date : {{event.enddate | date:'short'}}</span>
+            </div>
+            <div class="meta-item course-">
+                <span class="fa fa-user-o"></span>
+                <span class="meta-value"> Limit attend : {{event.limitattend}} </span>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="author align-items-center">
+            <img src="assets/Images/Users/{{userimage}}" alt="" class="img-fluid rounded-circle" >
+            <ul class="blog-meta" style="padding-left: 0.5px; margin-top: 10px">
+                <li>
+                    <span class="meta-value mx-1" >Created by {{username}} </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.colorbut{
+    border: 1px solid var(--primary-color) !important;
+      border-radius: var(--border-radius);
+      font-weight: 70;
+      background: var(--primary-color) !important ;}
+
+      
+.mdc-form-field>label{
+  margin-top: 30px !important;  
+}
+.label {  
+
+margin-bottom: 0rem !important;
+
+}

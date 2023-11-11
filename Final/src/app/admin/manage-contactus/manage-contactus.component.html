@@ -1,0 +1,97 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main id="main" class="main">
+  <section class="section dashboard">
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="card p-3">
+            <h1>Details</h1>
+            <div>
+                <h4>Contact_Us</h4>
+                <hr />
+                <dl class="row" >
+                    <dt class = "col-sm-2 mt-3">
+                      Location
+                    </dt>
+                    <dd class = "col-sm-10 mt-3">
+                     {{con.location}}
+                    </dd>
+                    <dt class = "col-sm-2 mt-3">
+                      Phone Number
+                    </dt>
+                    <dd class = "col-sm-10 mt-3">
+                     {{con.phonenumber}}
+                    </dd>
+                    <dt class = "col-sm-2 mt-3">
+                      Title
+                    </dt>
+                    <dd class = "col-sm-10 mt-3"> 
+                      {{con.text1}}
+                    </dd>
+                    <dt class = "col-sm-2 mt-3">
+                      Paragraph
+                    </dt>
+                    <dd class = "col-sm-10 mt-3">
+                      {{con.text2}}
+                    </dd>
+                    <dt class = "col-sm-2 mt-3">
+                      Email
+                    </dt>
+                    <dd class = "col-sm-10 mt-3">
+                      {{con.email}}
+                    </dd>
+                </dl>
+            </div>
+            <div>
+              
+              <button class="btn btn-primary m-1" (click)="updateDailog(con)">Update</button> |
+                <a routerLink="/admin/dashboard">Back</a>
+            </div>
+       </div>
+
+    </div>
+</div>
+</section>
+
+  
+  
+  <ng-template #callUpdate>
+    <h2 mat-dialog-title>Update Contact_Us</h2>
+    <mat-dialog-content >
+      <form [formGroup]="updateForm" >
+        <mat-form-field >
+          <mat-label>Location</mat-label>
+          <input type="text" matInput formControlName="location" [(ngModel)]="p_data.location" />
+        </mat-form-field>
+        <br/>
+        <mat-form-field  hintLabel="Max 10 characters">
+          <mat-label>Phone Number</mat-label>
+          <input type="text" matInput formControlName="phonenumber"[(ngModel)]="p_data.phonenumber" />
+        </mat-form-field>
+        <br />
+        <mat-form-field >
+          <mat-label> Title </mat-label>
+          <input type="text" matInput formControlName="text1"[(ngModel)]="p_data.text1"/>
+        </mat-form-field>
+        <br />     
+        <mat-form-field >
+          <mat-label>Description</mat-label>
+          <textarea type="text" matInput formControlName="text2"[(ngModel)]="p_data.text2"></textarea>
+        </mat-form-field>
+        <br /> 
+        <mat-form-field >
+          <mat-label>Email</mat-label>
+          <input type="text" matInput formControlName="email"[(ngModel)]="p_data.email"/>
+        </mat-form-field>
+        <br />
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="updateContactus()">
+        Update
+      </button>
+    </mat-dialog-actions>
+  </ng-template>
+  </main>

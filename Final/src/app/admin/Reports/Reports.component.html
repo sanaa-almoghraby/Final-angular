@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+
+      <button (click)="generatePDF()"  class = "btn btn-primary">Generate PDF Report</button>
+
+      <br>
+      <h5 class="card-title">Table with Reports</h5>
+      <input (change)="filterdata()" type="date" [(ngModel)]="_StartDate" class="form-control" id="inlineFormInput" placeholder="Start Date">
+      <br>
+      <input (change)="filterdata()" type="date" [(ngModel)]="_EndDate" class="form-control" id="inlineFormInput" placeholder="End date">
+      <!-- Table with stripped rows -->
+      <div #reportContent>
+        <h5 class="card-title">Table with Reports</h5>
+        <br>
+        <table class="table table-striped" style="width: 100%;">
+          <thead>
+            <tr>
+              <th scope="col"> name</th>
+              <th scope="col">startdate</th>
+              <th scope="col">enddate</th>
+              <th scope="col">phone</th>
+              <th scope="col">category</th>
+              <th scope="col">category Price</th>
+              <th scope="col">Attends</th>
+            </tr>
+          </thead>
+          <tbody>
+              
+
+            <tr *ngFor="let e of admin.events | filterDate: _StartDate : _EndDate">
+              <td>{{e.name}}</td>
+              <td>{{e.startdate |date:'shortDate'}}</td>
+              <td>{{e.enddate |date:'shortDate'}}</td>
+              <td>{{e.phone}}</td>
+              <td>{{getcategorybyid(e.categoryid)?.name}}</td>
+              <td>{{getcategorybyid(e.categoryid)?.price}}$</td>
+              <td>{{getnumberregister(e.eventid)}}  /  {{e.limitattend}}</td>
+            </tr>
+
+          </tbody>
+          <tfoot>
+
+            <td>Total Event : {{(admin.events | filterDate: _StartDate : _EndDate).length }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total Price : </td>
+            <td>{{ calculateTotalPrice(admin.events | filterDate: _StartDate : _EndDate) }}$</td>
+
+          </tfoot>
+        </table>
+        <!-- End Table with stripped rows -->
+        <div class="theme-layout" >
+          
+          <section>
+            <div class="gap gray-bg">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="d-flex"> <!-- Use flexbox for same-line layout -->
+                    <!-- First Canvas -->
+                    <div class="chart  mt-5" id="chartContainer" style="height: 400px; width: 50%">
+                      <canvas style="height: 100%; width: 100%" baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions" [plugins]="pieChartPlugins">
+                      </canvas>
+                    </div>
+                    <!-- Second Canvas -->
+                    <div class="chart mt-5" id="chartContainer" style=" height: 400px; width: 50%">
+                      <canvas style="margin: 0 auto;" baseChart [data]="pieChartData1" [type]="pieChartType1" [options]="pieChartOptions1" [plugins]="pieChartPlugins1">
+                      </canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

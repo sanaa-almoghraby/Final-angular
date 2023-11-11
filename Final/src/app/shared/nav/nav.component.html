@@ -1,0 +1,54 @@
+<header id="site-header" class="fixed-top">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-dark stroke" style = "margin-top: 10px">
+        <h1>
+          <a class="navbar-brand" href="index.html">
+            <span class="fa fa-diamond"></span>EVENTFUL<span class="logo">Journey to success</span></a>
+        </h1>
+  
+        <button class="navbar-toggler  collapsed bg-gradient colorbut" type="button" data-toggle="collapse"
+          data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+          <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav mx-lg-auto">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item @@events__active">
+              <a class="nav-link" routerLink="/events">Events</a>
+            </li>
+            <li class="nav-item @@about__active">
+              <a class="nav-link" routerLink="/about">About Us</a>
+            </li>
+            <li class="nav-item @@courses__active">
+              <a class="nav-link" routerLink="/contact">Contact</a>
+            </li>
+            
+            </ul>           
+            
+          <div class="top-quote mr-lg-2 text-center">
+            <a routerLink="/security/login" class="btn login mr-2" *ngIf="!check">              
+              <span class="fa fa-user"></span> login</a>
+          </div>
+            
+            <div class="top-quote mr-lg-2 text-center" *ngIf="check">
+              <a *ngIf="checkrole == 1" class="nav-link nav-profile d-flex align-items-center pe-0" routerLink="/admin/dashboard" data-bs-toggle="dropdown" > 
+                <img  src="assets/Images/Users/{{user?.image}}" alt="Profile"  class="avatar">
+                <span class="d-none d-md-block  ps-2">{{user?.username}}</span>
+              </a>
+              <a *ngIf="checkrole == 2" class="nav-link nav-profile d-flex align-items-center pe-0" routerLink="/user/edit" data-bs-toggle="dropdown" > 
+                <img  src="assets/Images/Users/{{user?.image}}" alt="Profile"  class="avatar">
+                <span class="d-none d-md-block  ps-2">{{user?.username}}</span>
+              </a>
+            </div>
+        </div>
+        <!-- toggle switch for light and dark theme -->
+     
+        <!-- //toggle switch for light and dark theme -->
+      </nav>
+    </div>
+  </header>

@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Table Requestes Testimonials</h4>
+
+      <!-- Table with stripped rows -->
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Full name</th>
+            <th scope="col">Email</th>        
+            <th scope="col">Massege</th>          
+            <th scope="col">Oprition</th>                 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="checkdata" > <td class="centered-column" colspan="5" style="text-align: center;">No Requestes</td></tr>
+          <tr  *ngFor="let tes of admin.testimonials"> 
+            <td>{{getuser(tes.userid)?.fullname}}</td>  
+            <td>{{getuser(tes.userid)?.email}}</td>
+            <td>{{tes.message}}</td>
+            <td>
+                <button  class="btn btn-danger m-1"  (click)="openDeleteDailog(tes.tid)">Delete </button>
+              <!-- <button class="btn btn-primary m-1"  (click)="accept()">Accept </button>   -->
+              
+                <button class="btn btn-primary m-1" (click)="updateIsAccepted(tes)">Accept</button>
+             
+        
+            </td>
+           <!-- delete dailog -->
+            <ng-template #callDelateTestimonial>
+            <h4 mat-dialog-title>Delete {{tes.message}}  from :  {{getuser(tes.userid)?.fullname}}</h4>
+            
+              <div mat-dialog-content>Are you sure you went to delete this item ?</div>
+              <div mat-dialog-actions>
+                <button mat-button mat-dialog-close="yes">Yes</button>
+                <button mat-button mat-dialog-close="no">No</button>
+              </div>
+              </ng-template>
+          </tr>        
+        </tbody>
+      </table>
+      <!-- End Table with stripped rows -->
+
+    </div>
+  </div>
+
+</main>
+
+
+ 
+
+   
+
+   
+
+  

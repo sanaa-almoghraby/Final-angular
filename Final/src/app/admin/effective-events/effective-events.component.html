@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Table Events Effective</h4>
+      <div class="input-group">
+        <label for="startDateInput" class="bold-label">Start Date</label>
+        <input type="date" [(ngModel)]="_StartDate" class="form-control" id="startDateInput" placeholder="Start Date">
+      
+        <label for="endDateInput" class="bold-label">End Date</label>
+        <input type="date" [(ngModel)]="_EndDate" class="form-control" id="endDateInput" placeholder="End Date">
+      </div>
+      <br>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Is Paid</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+          <tr *ngFor="let e of admin.events | filterDate: _StartDate : _EndDate">
+            <td>{{e.name}}</td>
+            <td>{{e.startdate | date:'shortDate'}}</td>
+            <td>{{e.enddate | date:'shortDate'}}</td>
+            <td>
+              <span *ngIf="e.ispayed === 0" style="color:red">Not Paid</span>
+              <span *ngIf="e.ispayed === 1" style="color:green">Is Paid</span>
+            </td>
+            <td>{{e.phone}}</td>
+            <td>{{e.address}}</td>
+            <td>{{e.description}}</td>
+            <td>{{findcategory(e.categoryid)?.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <ng-template #callDelateDailog>
+    <h1 mat-dialog-title>Delete Homepage</h1>
+    <div mat-dialog-content>Are you sure you went to delete this item ?</div>
+    <div mat-dialog-actions>
+      <button mat-button mat-dialog-close="yes">Yes</button>
+      <button mat-button mat-dialog-close="no">No</button>
+    </div>
+  </ng-template>
+
+</main>

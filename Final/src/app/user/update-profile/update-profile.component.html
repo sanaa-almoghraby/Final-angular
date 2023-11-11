@@ -1,0 +1,513 @@
+<app-nav></app-nav>
+
+
+
+<section class="w3l-breadcrumb">
+  <div class="breadcrumb-bg breadcrumb-bg-about py-5">
+      <div class="container pt-lg-5 pt-3 p-lg-4 pb-3">
+          <h2 class="title mt-5 pt-lg-5 pt-sm-3">Account</h2>
+          <ul class="breadcrumbs-custom-path pb-sm-5 pb-4 mt-2 text-center mb-md-5">
+              <li><a [routerLink]="['/']" style = "text-decoration: none;">Home</a></li>
+              <li class="active">&nbsp;/ My Account </li>
+          </ul>
+      </div>
+  </div>
+  <div class="waveWrapper waveAnimation">
+      <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+          <path d="M-5.07,73.52 C149.99,150.00 299.66,-102.13 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none;"></path>
+      </svg>
+  </div>
+</section>
+<div class="container light-style flex-grow-1 container-p-y" style="margin-bottom: 70px !important;">
+  <h4 class="font-weight-bold py-3 mb-4">Account settings</h4>
+
+  <div class="card overflow-hidden">
+    <div class="row no-gutters row-bordered row-border-light">
+      <div class="col-md-2 pt-0" style=" border-right: 2px solid #ccc; ">
+        <div class="list-group list-group-flush account-settings-links">
+          <a class="list-group-item list-group-item-action active" data-toggle="list"
+            href="#account-general">General</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-update"
+            (click)="update()">Update Profile</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-username">Change
+            Username</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-change-password">Change
+            password</a>
+          <a class="list-group-item list-group-item-action" data-toggle="list" href="#account-info">Manage My
+            Events</a>
+          <a (click)="logout()" class="list-group-item list-group-item-action" data-toggle="list"
+            href="#account-notifications">Log out</a>
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div class="tab-content">
+          <!-- ---------------------------------------------Profile Overview ----------------------------------------------------- -->
+
+          <div class="tab-pane fade show active profile-overview" id="account-general">
+            <div class="card-body media align-items-center">
+              <img src="assets/Images/Users/{{img}}" alt="Profile" class="avatar" style="margin: 0 auto;" />
+
+            </div>
+            <h2 class="titless" style="text-align: center;">{{user.username}}</h2>
+            <hr class="border-light m-0" />
+
+            <div class="card-body">
+              <h5 class="card-title" style="font-size: 15px;">Profile Details</h5>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 show">Full Name</div>
+                <div class="col-lg-9 col-md-8 showdata">{{user.fullname}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 show">User Name</div>
+                <div class="col-lg-9 col-md-8 showdata">{{user.username}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 show">Email</div>
+                <div class="col-lg-9 col-md-8 showdata">{{user.email}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 show">Phone</div>
+                <div class="col-lg-9 col-md-8 showdata">{{user.phone}}</div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-3 col-md-4 show">Gender</div>
+                <div class="col-lg-9 col-md-8 showdata">{{user.gender}}</div>
+              </div>
+            </div>
+            <a (click)="deleteUser(user.userid)" class="col-lg-3 col-md-4 show text-danger">Delete Account</a>
+          </div>
+
+          <!-- ---------------------------------------------Profile Edit Form----------------------------------------------------- -->
+
+          <div class="tab-pane fade " id="account-update">
+            <form [formGroup]="updateprofile">
+              <div class="card-body media align-items-center">
+                <img src="assets/Images/Users/{{us.displayimg}}" alt="Profile" class="avatar" />
+
+                <div class="media-body ml-4">
+                  <label class="btn btn-outline-primary">
+                    Upload new photo
+                    <input type="file" class="account-settings-fileinput" #file formControlName="image"
+                      (change)="uploadImage(file.files)" [(ngModel)]="user.image" />
+                  </label>
+                  &nbsp;
+
+                  <div class="text-light small mt-1">
+                    Allowed JPG, GIF or PNG. Max size of 800K
+                  </div>
+                </div>
+              </div>
+
+              <hr class="border-light m-0" />
+
+              <div class="card-body">
+                <div class="form-group">
+                  <label class="form-label">Full Name</label>
+                  <input name="fullName" type="text" formControlName="fullname" [(ngModel)]="user.fullname"
+                    class="form-control" />
+                  <span *ngIf="
+                      updateprofile.controls['fullname'].hasError('required')
+                    " class="text-danger">Full Name is required</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Username</label>
+                  <input name="username" type="text" formControlName="username" [(ngModel)]="user.username"
+                    class="form-control mb-1" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">E-mail</label>
+                  <input name="email" type="text" formControlName="email" [(ngModel)]="user.email"
+                    class="form-control mb-1" readonly />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input class="form-control" name="phone" type="text" formControlName="phone" [(ngModel)]="user.phone"
+                    class="form-control mb-1" maxlength="10" />
+                  <span *ngIf="updateprofile.controls['phone'].hasError('required')" class="text-danger">phone is
+                    required</span>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Gender</label>
+                  <input class="form-control" name="phone" type="text" formControlName="gender"
+                    [(ngModel)]="user.gender" class="form-control mb-1" readonly />
+                </div>
+                <div class="text-right mt-3">
+                  <button type="button" class="btn btn-primary colorbut" (click)="updateProfile()">
+                    Save changes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- ---------------------------------------------Change Username Form----------------------------------------------------- -->
+          <div class="tab-pane fade" id="account-change-username">
+
+            <span style="color:dodgerblue !important; margin-left: 15px ;">IF you Change Username make sure you Choosed
+              valid user name will be redirected to the login page </span><br><br>
+            <div class="card-body pb-2">
+              <div class="form-group">
+                <label class="form-label">User Name</label>
+
+                <input (change)="checkuser()" type="text" class="form-control" [formControl]="userrname">
+
+                <span *ngIf="userrname.hasError('invalidUsername')&& 
+                      userrname?.touched" class="text-danger">Existe UserName</span>
+                <span *ngIf="userrname.hasError('sameUsernme') " class="text-danger">Same UserName</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">password</label>
+                <input (change)="CorrectPasswordForUser()" type="password" class="form-control"
+                  [formControl]="passwordd">
+                <span *ngIf="passwordd.hasError('required')&& 
+                      passwordd?.touched" class="text-danger">Current Password is required</span>
+                <span *ngIf="passwordd.hasError('notCorrect')" class="text-danger">Please Enter Correct Password</span>
+              </div>
+
+              <div class="text-right mt-3">
+                <button type="button" class="btn btn-primary colorbut" [disabled]="!userrname.valid || !passwordd.valid"
+                  (click)="changeusername()">
+                  change</button>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- ---------------------------------------------Change password Form----------------------------------------------------- -->
+
+          <div class="tab-pane fade" id="account-change-password">
+            <span style="color:dodgerblue !important; margin-left: 15px ;">IF you Change Password will be redirected to
+              the login page </span><br><br>
+            <form [formGroup]="updatePassProfile">
+              <div class="card-body pb-2">
+                <div class="form-group">
+                  <label class="form-label">Current password</label>
+
+                  <input (change)="CorrectPassword()" type="password" class="form-control" formControlName="password" />
+                  <span *ngIf="updatePassProfile.controls['password'].hasError('required') && 
+                      updatePassProfile.controls['password']?.touched" class="text-danger">Current Password is
+                    required</span>
+                  <span *ngIf="updatePassProfile.controls['password'].hasError('notCorrect')" class="text-danger">Please
+                    Enter Correct Password</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">New password</label>
+                  <input (change)="matchPassword()" type="password" class="form-control" formControlName="newpassword">
+                  <span *ngIf="updatePassProfile.controls['newpassword'].hasError('required') && 
+                      updatePassProfile.controls['newpassword']?.touched" class="text-danger">New Password is
+                    required</span>
+                  <span *ngIf="updatePassProfile.controls['newpassword'].hasError('minlength')"
+                    class="text-danger">Please Enter Strong Password</span>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Repeat new password</label>
+                  <input (change)="matchPassword()" type="password" class="form-control"
+                    formControlName="confirmNewpassword">
+                  <span *ngIf="updatePassProfile.controls['confirmNewpassword'].hasError('missMatch')"
+                    class="text-danger">not match with new Password</span>
+                </div>
+                <div class="text-right mt-3">
+                  <button type="button" class="btn btn-primary colorbut" [disabled]="!updatePassProfile.valid"
+                    (click)="changePass()">
+                    change</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- ---------------------------------------------Manage Event----------------------------------------------------- -->
+          <div class="tab-pane fade" id="account-info">
+            <div class="card-body pb-2">
+              <h2 class="card-title fw-semibold mb-4" style="display: contents">
+                All Events
+              </h2>
+              <button [routerLink]="['/user/createEvent']" class="btn btn-primary float-right colorbut" mdbRipple>
+                Create New
+              </button>
+            </div>
+            <div class="card-body pb-2"></div>
+            <table class="table table-hover " style="margin-top: 19px">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">LimitedAttend</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Payed</th>
+                  <th scope="col">Event Type</th>
+                  <th scope="col">Operation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of filterevents; let num = index">
+                  <td>{{num+1}}</td>
+                  <td>{{obj.name}}</td>
+                  <td>{{obj.limitattend}}/{{getattendens(obj.limitattend,obj.eventid)}}</td>
+                  <td *ngIf="obj.isaccepted == 0" style="color:red">Rejected</td>
+                  <td *ngIf="obj.isaccepted == 1">Waiting</td>
+                  <td *ngIf="obj.isaccepted == 2 && obj.ispayed == 0" style="color:green">Accepted and Not shared</td>
+                  <td *ngIf="obj.isaccepted == 2 && obj.ispayed == 1" style="color:green">Accepted and Shared</td>
+                  <td *ngIf="obj.ispayed == 0">Not Payed</td>
+                  <td *ngIf="obj.ispayed == 1" style="color:green">Payed</td>
+                  <td>{{getcategorybyid(obj.categoryid).name}}</td>
+                  <td>
+                    <button (click)="deleteEvent(obj.eventid)" class="btn btn-outline-danger m-1"><i class="bi bi-trash3"></i></button>
+                    <button (click)="updateDialog(obj)" *ngIf="obj.isaccepted != 0"
+                      class="btn btn-outline-success m-1"><i class="bi bi-pencil-square"></i></button>
+                    <button (click)="visaDialog(obj)" *ngIf="obj.ispayed == 0 &&  obj.isaccepted == 2" class="btn btn-outline-success m-1">
+                      <i class="bi bi-currency-dollar"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
+
+<ng-template #callUpdateDailog>
+  <h2 mat-dialog-title>Create New Event</h2>
+  <mat-dialog-content class="mat-typography">
+
+
+    <form class="example-form" [formGroup]="updateEvent">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+      <mat-form-field class="example-full-width col-md-4">
+        <mat-label>Event Name</mat-label>
+        <input type="text" matInput formControlName="name" [(ngModel)]="event.name">
+        <mat-error *ngIf="updateEvent.controls['name'].hasError('required')">
+          Event Name is required
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width col-md-4">
+        <mat-label>Start Date</mat-label>
+        <input type="date" matInput formControlName="startdate" [(ngModel)]="event.startdate">
+        <mat-error *ngIf="updateEvent.controls['startdate'].hasError('required')">
+          startdate is required
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width col-md-4">
+        <mat-label>End Date</mat-label>
+        <input type="date" matInput formControlName="enddate" [(ngModel)]="event.enddate">
+        <mat-error *ngIf="updateEvent.controls['enddate'].hasError('required')">
+          End Date is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="example-full-width col-md-4">
+        <mat-label>Limit Attend</mat-label>
+        <input type="number" matInput formControlName="limitattend" [(ngModel)]="event.limitattend">
+        <mat-error *ngIf="updateEvent.controls['limitattend'].hasError('required')">
+          Limit Attend is required
+        </mat-error>
+      </mat-form-field>
+      
+      <mat-form-field class="example-full-width col-md-4 ">
+        <mat-label>Phone</mat-label>
+        <input type="number" matInput formControlName="phone" [(ngModel)]="event.phone">
+        <mat-error *ngIf="updateEvent.controls['phone'].hasError('required')">
+          Phone is required
+        </mat-error>
+      </mat-form-field>
+      
+      <div class="example-full-width col-md-4" style="margin: auto 0">
+        <input type="file" #file formControlName="image" (change)="uploadImageEvent(file.files)" [(ngModel)]="event.image">
+      </div>
+    </div>
+    <div class="row">
+    <mat-form-field class="example-full-width col-md-8">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" [(ngModel)]="event.description"></textarea>
+      <mat-error *ngIf="updateEvent.controls['description'].hasError('required')">
+        Description is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width col-md-4 ">
+      <mat-label>Address</mat-label>
+      <input type="text" matInput formControlName="address" [(ngModel)]="Address" readonly>
+    </mat-form-field>
+  </div>
+  </div>
+</div>
+ </form>
+ <div class="mt-4">
+  <div class="input-field">
+  <label>Change Your location *</label>
+  <google-map height="450px" width="100%" [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)" style="margin: 0 auto;">
+      <map-marker *ngIf="position" [position]="position" [options]="markerOptions"></map-marker>
+    </google-map  >
+
+  </div>
+  </div>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="updateevent()" [mat-dialog-close]="true" cdkFocusInitial> Save</button>
+  </mat-dialog-actions>
+</ng-template>
+
+
+<ng-template #callDelateDailog>
+
+ 
+
+  <h1 mat-dialog-title>Delete Event</h1>
+  
+  <div mat-dialog-content>Are you sure you went to delete this item ?</div>
+  
+  <div mat-dialog-actions>
+  
+    <button mat-button mat-dialog-close="yes">Yes</button>
+  
+    <button mat-button mat-dialog-close="no">No</button>
+  
+  </div>
+  
+  </ng-template>
+
+
+
+
+
+
+
+  <ng-template #callDeleteUserDailog>
+
+ 
+
+    <h1 mat-dialog-title>Delete User</h1>
+    
+    <div mat-dialog-content>Are you sure you went to delete this user ?</div>
+    
+    <div mat-dialog-actions>
+    
+      <button mat-button mat-dialog-close="yes">Yes</button>
+    
+      <button mat-button mat-dialog-close="no">No</button>
+    
+    </div>
+    
+    </ng-template>
+
+
+
+    <ng-template #callPaymentDialog > 
+
+      <h2 mat-dialog-title>Payment Form</h2>
+      <mat-dialog-content class="mat-typography">
+        <main class="page payment-page">
+          <section class="payment-form dark">
+            <div class="container">
+              <div class="block-heading">
+                <h2>Payment</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+              </div>
+              <form [formGroup] ="visa">
+                <div class="products">
+                  <h3 class="title">Checkout</h3>
+                  <div class="item">
+                    <span class="price">${{eventcat?.price}}</span>
+                    <p class="item-name">{{event?.name}}</p>
+                    <p class="item-description">Event Category {{eventcat?.name}}</p>
+                  </div>
+                </div>
+                <div class="card-details">
+                  <h3 class="title">Credit Card Details</h3>
+                  <div class="row">
+                    <div class="form-group col-sm-7">
+                      <label for="card-holder">Card Holder</label>
+                      <input  type="text" formControlName="cardname" class="form-control" placeholder="Card Holder" aria-label="Card Holder" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-group col-sm-5">
+                      <label for="">Expiration Date</label>
+                      <div class="input-group expiration-date">
+                        <input name="somename" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          type = "number" class="form-control" formControlName="datam" aria-label="MM" aria-describedby="basic-addon1" placeholder="MM"
+                          maxlength = "2"
+                          /> 
+                        <span class="date-separator ms-3">/</span> 
+                        <input name="somename" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                          type = "number" class="form-control" formControlName="datay" aria-label="YY" aria-describedby="basic-addon1" placeholder="YY"
+                          maxlength = "2"
+                          /> 
+                      </div>
+                    </div>
+                    <div class="form-group col-sm-8">
+                      <label for="card-number">Card Number</label>
+                      <input id="card-number" type="text" formControlName="cardnumber" class="form-control" placeholder="Card Number" aria-label="Card Holder" aria-describedby="basic-addon1" maxlength="16">
+                    </div>
+                    <div class="form-group col-sm-4">
+                      <label for="cvc">Cvv</label>
+                      <input id="cvc" type="text" formControlName="cvv" class="form-control" placeholder="Cvv" aria-label="Card Holder" aria-describedby="basic-addon1" maxlength="3">
+                    </div>
+                    <div class="form-group col-sm-12">
+                      <button type="button" class="btn btn-primary btn-block colorbut" (click)="Proceed()">Proceed</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+        </main>
+      </mat-dialog-content>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancel</button>
+      </mat-dialog-actions>
+    
+    
+    </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<app-footer></app-footer>

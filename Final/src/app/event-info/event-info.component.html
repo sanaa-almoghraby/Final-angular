@@ -1,0 +1,126 @@
+<app-nav></app-nav>
+<section class="w3l-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-5">
+        <div class="container pt-lg-5 pt-3 p-lg-4 pb-3">
+            <h2 class="title mt-5 pt-lg-5 pt-sm-3">Info Event</h2>
+            <ul class="breadcrumbs-custom-path pb-sm-5 pb-4 mt-2 text-center mb-md-5">
+                <li><a [routerLink]="['/']" style="text-decoration: none;">Home</a></li>
+                <li><a [routerLink]="['/events']" style="text-decoration: none;">&nbsp;/ Event&nbsp;</a></li>
+                <li class="active"> / {{data.event.name}} </li>
+            </ul>
+        </div>
+    </div>
+    <div class="waveWrapper waveAnimation">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+            <path d="M-5.07,73.52 C149.99,150.00 299.66,-102.13 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none;"></path>
+        </svg>
+    </div>
+</section>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-title">{{data.event.name}}</h2>
+            <h4 class="card-subtitle" style="color:  var(--primary-color);" *ngIf="data.event?.userid == user.userid">
+                You are owner of this Event</h4>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="white-box text-center">
+                        <img src="assets/Images/Events/{{data.event?.image}}" class="img-responsive" style="width: 100%;
+                        height: 300px;">
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <h3 class="box-title mt-5">Key Highlights</h3>
+                    <ul class="list-unstyled">
+                        <li><i class="fa fa-check text-success"></i>Sturdy structure</li>
+                        <li><i class="fa fa-check text-success"></i>Designed to foster easy portability</li>
+                        <li><i class="fa fa-check text-success"></i>Perfect furniture to flaunt your wonderful
+                            collectibles</li>
+                    </ul>
+                    <h4 style="margin-top: 21px !important; margin-bottom: 21px !important;">
+                        Limit Attendees : <small class="text-success">{{data.event?.limitattend}}</small>
+                    </h4>
+                    <h4 style="margin-top: 21.5px !important; margin-bottom: 21px !important;">
+                        Remaining Attendees : <small class="text-success">{{getattendens( data.event?.limitattend ,
+                            data.event?.eventid)}}</small>
+                    </h4>
+                    <button *ngIf="check" type="button" class="btn btn-primary btn-style  colorbut" style="color: white;" [disabled]="getattendens( data.event?.limitattend , data.event?.eventid) == 0 || checkregisteruser( data.event?.eventid)
+                        || data.event?.userid == user.userid  || !checkrole "
+                        (click)="createRegister(data.event?.eventid)">Register</button>
+
+
+                    <button type="button" class="btn btn-primary btn-style  colorbut" style="color: white;"
+                        *ngIf="!check" routerLink="/security/login">Register</button>
+                        
+                    <button type="button" class="btn btn-primary btn-style ms-3 colorbut"
+                        style="color: white; background:red !important;" *ngIf="checkregisteruser(data.event?.eventid)"
+                        (click)="DeleteRegister(data.event?.eventid)">cancel</button>
+
+                </div>
+                <div class="col-lg-12 ">
+                    <h4 class="box-title mt-5">Event description</h4>
+                    <p>{{data.event.description}}</p>
+
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <h3 class="box-title mt-5">General Info</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-product">
+                            <tbody>
+                                <tr>
+                                    <td width="390">Event Name </td>
+                                    <td>{{data.event.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Event Type</td>
+                                    <td>{{data.categoryname}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Limitattend</td>
+                                    <td>{{data.event.limitattend}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td>{{data.event.startdate | date:'short'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>End Date</td>
+                                    <td>{{data.event.enddate | date:'short'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Country</td>
+                                    <td>{{locationdata.address.country}}</td>
+                                </tr>
+                                <tr *ngIf="locationdata.address.city != null ">
+                                    <td>City</td>
+                                    <td>{{locationdata.address.city}}</td>
+                                </tr>
+                                <tr *ngIf="locationdata.address.village != null ">
+                                    <td>Village</td>
+                                    <td>{{locationdata.address.village}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <td>{{data.event.phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Name of the Responsible</td>
+                                    <td>{{data.username}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <google-map height="450px" width="100%" [center]="center" [zoom]="zoom">
+                            <map-marker #marker="mapMarker" *ngFor="let markerPosition of markerPositions"
+                                [position]="markerPosition" (mapClick)="openInfoWindow(marker)"></map-marker>
+                            <map-info-window> {{this.data.event.name}}</map-info-window>
+                        </google-map>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

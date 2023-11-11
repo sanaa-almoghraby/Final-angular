@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<main id="main" class="main">
+
+  <section class="section dashboard">
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="card p-3">
+            <h1>Details</h1>
+            <div>
+                <h4>Home</h4>
+                <hr />
+                <dl class="row" >
+                    <dt class = "col-sm-2 mt-3">
+                       Slider
+                    </dt>
+                    <dd class = "col-sm-10 mt-3">
+                      <a (click)="gotoslider()"  style="color: blue;">change slider</a>
+                    </dd>       
+                    <dt class = "col-sm-2 mt-3">
+                      Paragraph Service
+                    </dt>
+                    <dd class = "col-sm-10 mt-3">
+                      {{home.text4}}
+                    </dd>
+                    <dt class = "col-sm-2 mt-3">
+                      Paragraph About us
+                    </dt>
+                    <dd class = "col-sm-10 mt-3">
+                      {{home.textd}}
+                    </dd>
+                     
+                </dl>
+            </div>
+            <div>
+              <button class="btn btn-primary m-1"(click)="updateDailog(home)">Update</button> |
+                <a routerLink="/admin/dashboard">Back</a>
+            </div>
+       </div>
+
+    </div>
+</div>
+</section>
+ 
+  
+  <ng-template #callUpdate>
+    <h2 mat-dialog-title>Update home</h2>
+    <mat-dialog-content >
+      <form [formGroup]="updateForm" >
+  
+        <mat-form-field >
+          <mat-label>Paragraph Service</mat-label>
+          <input type="text"matInput formControlName="text4" [(ngModel)]="p_data.text4"/>
+        </mat-form-field>
+        <br />     
+        <mat-form-field >
+          <mat-label>Paragraph About-us</mat-label>
+          <input type="text"matInput formControlName="textd" [(ngModel)]="p_data.textd"/>
+        </mat-form-field>
+        <br />     
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-button [mat-dialog-close]="true"  cdkFocusInitial (click)="updateHome()" >
+        Update
+      </button>
+    </mat-dialog-actions>
+  </ng-template>
+  
+</main>

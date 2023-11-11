@@ -1,0 +1,147 @@
+<app-nav></app-nav>
+<section class="w3l-breadcrumb">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-5">
+        <div class="container pt-lg-5 pt-3 p-lg-4 pb-3">
+            <h2 class="title mt-5 pt-lg-5 pt-sm-3">Events</h2>
+            <ul class="breadcrumbs-custom-path pb-sm-5 pb-4 mt-2 text-center mb-md-5">
+                <li><a [routerLink]="['/']" style="text-decoration: none;">Home</a>&nbsp;/&nbsp;</li>
+                <li><a [routerLink]="['/user/edit']" style="text-decoration: none;"> Profile </a>&nbsp;/&nbsp;</li>
+                <li><a [routerLink]="['/user/edit']" style="text-decoration: none;">Manage </a>&nbsp;/&nbsp;</li>
+                <li [routerLink]="['/user/edit']" class="active">Create Event</li>
+            </ul>
+        </div>
+    </div>
+    <div class="waveWrapper waveAnimation">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+            <path d="M-5.07,73.52 C149.99,150.00 299.66,-102.13 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                style="stroke: none;"></path>
+        </svg>
+    </div>
+</section>
+
+
+
+<section class="w3l-loginblock pb-5" id="contact">
+    <div class="contacts-9 pb-lg-5 pb-md-4">
+        <div class="container">
+            <div class="top-map">
+                <div class="map-content-9">
+                    <form [formGroup]="createEvent">
+                        <div class="media">
+                            <img *ngIf="us.displayimgevent != null " src="assets/Images/Events/{{us.displayimgevent}}" alt="Profile" class="im"  />
+                            <img *ngIf="us.displayimgevent == null " src="assets/Images/Events/logo.jpg" alt="Profile" class="im"  />
+                          </div>
+                          <div class="input-field">
+                            <div class="mb-3">
+                          <label > Image </label>
+                            <input type="file" class="form-control" #file formControlName="image"
+                              (change)="uploadImage(file.files)" style="margin: 0 auto;"/>
+                            </div>
+                            </div>
+                        <div class="form-grid signupgrids">
+
+                            <div class="input-field">
+                                <label> Event Name * </label>
+                                <input type="text" formControlName="name" placeholder="Event Name" 
+                                    maxlength="50" />
+                                <span *ngIf="createEvent.controls['name'].hasError('required') && 
+                                createEvent.controls['name']?.touched" class="text-danger"> Name
+                                    is Required</span>
+
+
+                            </div>  
+
+                            <div class="input-field">
+                                <label> Start Date *</label>
+                                <input (change)="checkdate()" type="date" formControlName="startdate" />
+                                <span *ngIf="createEvent.controls['startdate'].hasError('required') && 
+                                createEvent.controls['startdate']?.touched" class="text-danger">Start Date is
+                                    Required</span>
+                                    <span *ngIf="createEvent.controls['startdate'].hasError('checkdate') " 
+                                    class="text-danger">Start Date should be before End Date </span>
+                            </div>
+
+                            <div class="input-field">
+                                <label> End Date *</label>
+                                <input (change)="checkdate()" type="date" formControlName="enddate" />
+                                <span *ngIf="createEvent.controls['enddate'].hasError('required') && 
+                                  createEvent.controls['enddate']?.touched" class="text-danger">
+                                    End Date is Required</span>
+                            </div>
+
+                            <div class="input-field">
+                                <label> Phone number *</label>
+                                <input type="text" formControlName="phone" placeholder="07********" />
+                                <span *ngIf="createEvent.controls['phone'].hasError('required') && 
+                                createEvent.controls['phone']?.touched" class="text-danger">Phone Number is
+                                    Required</span>
+                            </div>
+
+                            <div class="input-field">
+                                <label>Limit Attend *</label>
+                                <input type="number" formControlName="limitattend" placeholder="Limit Attend"
+                                    required="" />
+                                <span *ngIf="
+                                    createEvent.controls['limitattend'].hasError('required') && 
+                                    createEvent.controls['limitattend']?.touched" class="text-danger">Limit Attend is
+                                    Required</span>
+                            </div>
+
+                            
+
+                            <div class="input-field">
+                                <label>Discription *</label>
+                                <input type="text" formControlName="description" placeholder="Discription"
+                                    required="" />
+                                <span *ngIf="
+                                    createEvent.controls['description'].hasError('required') && 
+                                    createEvent.controls['description']?.touched" class="text-danger">Discription is
+                                    Required</span>
+                            </div>
+                            
+                            <div class="input-field">
+                                <label>Address *</label>
+                                <input
+                                  type="text"
+                                  formControlName="address"
+                                  placeholder="Address"
+                                  readonly
+                                  [ngModel]="Address"
+                                />
+                                <span
+                                  *ngIf="createEvent.controls['address'].hasError('required') && 
+                                  createEvent.controls['address']?.touched" class="text-danger"> Address is Required</span>
+                              </div>
+                            
+                            <div class="input-field">
+                            <label>Event Category *</label><br>
+                            <mat-form-field style="width: 503px;">
+                                <mat-select formControlName="categoryid">
+                                  <mat-option *ngFor="let obj of us.categorys" [value]="obj.categoryid">{{ obj.name }}</mat-option>
+                                </mat-select>
+                              </mat-form-field> 
+                            </div>
+
+                        </div>
+                        <div class="mt-4">
+                            <div class="input-field">
+                            <label>Choose your location *</label>
+                            <google-map height="450px" width="100%" [center]="center" [zoom]="zoom" (mapClick)="addMarker($event)" style="margin: 0 auto;">
+                                <map-marker *ngIf="currentMarkerPosition" [position]="currentMarkerPosition" [options]="markerOptions"></map-marker>
+                              </google-map  >
+
+                            </div>
+                            </div>
+                        <button type="submit" class="btn btn-primary btn-style mt-4 colorbut"
+                            [disabled]="!createEvent.valid" (click)="Create()">
+                            Create
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<app-footer></app-footer>

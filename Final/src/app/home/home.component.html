@@ -1,0 +1,348 @@
+<app-nav></app-nav>
+<!-- main-slider -->
+<section class="w3l-main-slider" id="home">
+    <div class="companies20-content">
+        <div class="owl-one owl-carousel owl-theme">
+            <div class="item" *ngFor="let obj of guest.home">
+                <li>
+                    <div class="slider-info banner-view bg bg2" 
+                    style="
+                        width: 100%; 
+                        height: 100vh; 
+                        background-image: url('../../assets/Images/Pages/{{obj.image}}');
+                        background-size: cover; 
+                        background-position: center;
+                        background-repeat: no-repeat; 
+                        ">
+                        <div class="banner-info">
+                            <div class="container">
+                                <div class="banner-info-bg">
+                                    <h5>{{obj.textt}}</h5>
+                                    <p class="mt-4 pr-lg-4">{{obj.textp}}</p>
+                                    <a class="btn btn-style btn-primary mt-sm-5 mt-4 mr-2 colorbut" 
+                                    *ngIf="!check" routerLink="/security/login">Register Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </div>            
+        </div>
+    </div>
+
+    <div class="waveWrapper waveAnimation">
+        <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+            <path d="M-5.07,73.52 C149.99,150.00 299.66,-102.13 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none;"></path>
+        </svg>
+    </div>
+</section>
+<!-- /main-slider -->
+<section class="w3l-courses">
+    <div class="blog pb-5" id="courses">
+        <div class="container py-lg-5 py-md-4 py-2">
+            <h2 class="title-small text-center mb-1">Join our Events</h2>
+            <h3 class="title-big text-center mb-sm-5 mb-4">Featured <span>Events</span></h3>    
+            <div class="row" >
+                <div class="col-lg-4 col-md-6 item"  *ngFor="let i of [random - 1, random, random + 1]">
+               
+                    <div class="card" >
+                        <div class="card-header p-0 position-relative">
+                            <a href="#" class="zoom d-block">
+                                <img class="card-img-bottom d-block" src="assets/Images/Events/{{guest.events[i]?.image}}"
+                                    alt="Card image cap" style = "height: 300px ; width: 100;">
+                            </a>
+                            <div class="post-pos">
+                                <a  class="receipe blue">{{getcategorybyid(guest.events[i]?.categoryid)?.name}}</a>
+                            </div>
+                        </div>
+                        <div class="card-body course-details">
+                            <a href="#" class="course-desc" style = "text-decoration: none;">{{guest.events[i]?.name}}
+                            </a>
+                            <div class="course-meta mt-4">
+                                <div class="meta-item course-lesson">
+                                    <span class="fa fa-clock-o"></span>
+                                    <span class="meta-value"> start Date : {{guest.events[i]?.startdate}} </span>
+                                </div>
+                                <div class="meta-item course-lesson">
+                                    <span class="fa fa-clock-o"></span>
+                                    <span class="meta-value"> End Date : {{guest.events[i]?.enddate}}</span>
+                                </div>
+                                <div class="meta-item course-">
+                                    <span class="fa fa-user-o"></span>
+                                    <span class="meta-value"> Limit attend : {{guest.events[i]?.limitattend}} </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="author align-items-center">
+                                <img src="assets/Images/Users/{{getUserById(guest.events[i]?.userid)?.image}}" alt="" class="img-fluid rounded-circle" >
+                                <ul class="blog-meta" style="padding-left: 0.5px; margin-top: 10px">
+                                    <li>
+                                        <span class="meta-value mx-1" >Created by {{getUserById(guest.events[i]?.userid)?.username}} </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+                <div class="mt-5 text-more">
+                    <p class="pt-md-3 sample text-center ">
+                        <a routerLink="/events" style = "text-decoration: none;">View All Events <span class="pl-2 fa fa-long-arrow-right" style="color: #0d6efd;"></span></a>
+                    </p>
+                </div>
+            </div>
+            </div>
+        </div>
+        
+</section>
+
+
+
+
+
+<section class="w3l-features py-5" id="facilities">
+    <div class="call-w3 py-lg-5 py-md-4 py-2">
+        <div class="container">
+            <div class="row main-cont-wthree-2">
+                <div class="col-lg-5 feature-grid-left">
+                    <h3 class="title-big mb-4">Our Services </h3>
+                    <p class="text-para">
+                        {{guest.home[0].text4}}
+                    </p>
+                    <a routerLink="/about" class="btn btn-primary btn-style mt-md-5 mt-4 colorbut">About Us</a>
+                </div>
+                <div class="col-lg-7 feature-grid-right mt-lg-0 mt-5">
+                    <div class="call-grids-w3 d-grid">
+                        <div class="grids-1 box-wrap" *ngFor="let obj of guest.services">
+                            <!-- <a routerLink="/about" class="icon"><span class="fa fa-share"></span></a> -->
+                            <a routerLink="/about" class="icon"><img src="assets\Images\Icons\{{obj.image}}" style="height: 36px; width: 36px; float: left;"></a> <br>
+                            <h4><a routerLink="/about" class="title-head">{{obj.textt}}</a></h4>
+                            <p>{{obj.textd}}</p>
+                        </div>                                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- middle -->
+<div class="middle py-5">
+    <div class="container py-lg-5 py-md-4 py-2">
+        <div class="welcome-left text-center py-lg-4">
+            <h5 class="title-small mb-1">Start Event</h5>
+            <h3 class="title-big">Be more effective and register for any Events you want</h3>
+            <a routerLink="/security/login" class="btn btn-style btn-outline-light mt-sm-5 mt-4 mr-2">Get started now</a>
+            <a routerLink="/events" class="btn btn-style btn-primary mt-sm-5 mt-4 colorbut">Events</a>
+        </div>
+    </div>
+</div>
+<!-- //middle -->
+<section class="w3l-team py-5 pad" id="team" >
+    <div class="call-w3 py-lg-5 py-md-4 pad" style="padding-bottom:0.5rem !important;">
+        <div class="container">
+            <div class="row main-cont-wthree-2">
+                <div class="col-lg-5 feature-grid-left">
+                    <h5 class="title-small mb-1">Experienced professionals</h5>
+                    <h3 class="title-big mb-4">Meet our teachers</h3>
+                    <p class="text-para">{{guest.home[0].textd}}
+                    </p>
+                    <a routerLink="/about" class="btn btn-primary btn-style mt-md-5 mt-4 colorbut">Discover More</a>
+                </div>
+                <div class="col-lg-7 feature-grid-right mt-lg-0 mt-5">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="box16">
+                                <a href="#url"><img src="../../assets/Web/images/team1.jpg" alt="" style=" height: 336.71px;" class="img-fluid radius-image" /></a>
+                                <div class="box-content">
+                                    <h3 class="title"><a href="#url">James</a></h3>
+                                    <span class="post">Director</span>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="facebook">
+                                                <span class="fa fa-facebook-f"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="twitter">
+                                                <span class="fa fa-twitter"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-sm-0 mt-3">
+                            <div class="box16">
+                                <a href="#url"><img src="../../assets/Images/Events/2.jpg" alt="" style=" height: 336.71px;" class="img-fluid radius-image" /></a>
+                                <div class="box-content">
+                                    <h3 class="title"><a href="#url">Victoria</a></h3>
+                                    <span class="post">Managing Director</span>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="facebook">
+                                                <span class="fa fa-facebook-f"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="twitter">
+                                                <span class="fa fa-twitter"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-lg-4 mt-3">
+                            <div class="box16">
+                                <a href="#url"><img src="../../assets/Images/Events/3.jpg" alt="" style=" height: 336.71px;" class="img-fluid radius-image" /></a>
+                                <div class="box-content">
+                                    <h3 class="title"><a href="#url">Isabella</a></h3>
+                                    <span class="post">Teacher</span>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="facebook">
+                                                <span class="fa fa-facebook-f"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="twitter">
+                                                <span class="fa fa-twitter"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mt-lg-4 mt-3">
+                            <div class="box16">
+                                <a href="#url"><img src="../../assets/Images/Events/4.jpg" alt="" style=" height: 336.71px;" class="img-fluid radius-image" /></a>
+                                <div class="box-content">
+                                    <h3 class="title"><a href="#url">Elizabeth</a></h3>
+                                    <span class="post">Teacher</span>
+                                    <ul class="social">
+                                        <li>
+                                            <a href="#" class="facebook">
+                                                <span class="fa fa-facebook-f"></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="twitter">
+                                                <span class="fa fa-twitter"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- testimonials -->
+<section class="w3l-testimonials" id="clients">
+    <!-- /grids -->
+    <div class="cusrtomer-layout py-5">
+        <div class="container py-lg-4 py-md-3 pb-lg-0">
+
+            <h5 class="title-small text-center mb-1">Testimonials</h5>
+            <h3 class="title-big text-center mb-sm-5 mb-4">Happy Clients & Feedbacks</h3>
+            <!-- /grids -->
+            <div class="testimonial-width">
+                <div id="owl-demo1" class="owl-two owl-carousel owl-theme">
+                  <div class="item" *ngFor="let tes of guest.testimonials">  
+                        <div class="testimonial-content">
+                            <div class="testimonial">
+                                <blockquote>
+                                     <q>{{tes.message}}</q>
+                                </blockquote>
+                                <div class="testi-des">
+                                    <div class="test-img"><img src="assets/Images/Users/{{getUserById(tes.userid)?.image}}" class="img-fluid"
+                                            alt="client-img">
+                                    </div>
+                                    <div class="peopl align-self">
+                                        <h3>{{getUserById(tes.userid)?.username}}</h3>
+                                        <p class="indentity">Student</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>               
+            
+          
+            
+            <div class=" input-field " style="width: 60%; margin: 0 auto !important;" *ngIf="checkrole">
+                <img  src="assets/Images/Users/{{user?.image}}" alt="Profile"  class="avatar" *ngIf="user?.image != null" style="margin-right: 10px;">
+                <img  src="assets/Images/Users/user.png" alt="Profile"  class="avatar" *ngIf="user?.image == null" style="margin-right: 10px;">
+                
+                <label for="inputPassword2" class="sr-only">Testimonial</label>
+                <textarea [formControl]="message" class="form-control" placeholder="write your command here"> </textarea>
+                <button  (click)="sendtestmonial()" class="btn btn-primary btn-style send  colorbut"  *ngIf="check" [disabled]="!message.valid">send</button>
+                
+                <!-- <a routerLink="/security/login"  class="btn btn-primary btn-style send colorbut"  *ngIf="!check">send</a>   -->
+                <button routerLink="/security/login" class="btn btn-primary btn-style send  colorbut"  *ngIf="!check" [disabled]="!message.valid">send</button>          
+            </div>
+        
+    </div>         
+        <!-- /grids -->
+    </div>
+    <!-- //grids -->
+    <div class="container d-flex justify-content-center mt-20" style="padding-bottom: 3rem!important;" *ngIf="checkrole && checkreview"> 
+	
+
+        <div class="row">
+
+
+        
+            <div class="col-md-12" >
+        
+                <div class="stars">
+        
+          
+        
+            <input (click)="review = 5" class="star star-5" id="star-5" type="radio" name="star"/>
+        
+            <label class="star star-5" for="star-5"></label>
+        
+            <input (click)="review = 4" class="star star-4" id="star-4" type="radio" name="star"/>
+        
+            <label class="star star-4" for="star-4"></label>
+        
+            <input (click)="review = 3" class="star star-3" id="star-3" type="radio" name="star"/>
+        
+            <label class="star star-3" for="star-3"></label>
+        
+            <input (click)="review = 2" class="star star-2" id="star-2" type="radio" name="star"/>
+        
+            <label class="star star-2" for="star-2"></label>
+        
+            <input (click)="review = 1" class="star star-1" id="star-1" type="radio" name="star"/>
+        
+            <label class="star star-1" for="star-1"></label>
+        
+            <br>
+            <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-style mt-4 colorbut center" *ngIf="check" (click)="submitreview()">Submit</button>
+            <button routerLink="/security/login" type="submit" class="btn btn-primary btn-style mt-4 colorbut center" *ngIf="!check" >Submit</button>
+            </div>
+        </div>
+        
+        
+                
+        </div>
+            
+        
+        </div>
+          
+        </div>
+        
+</section>
+
+
+
+<app-footer></app-footer>

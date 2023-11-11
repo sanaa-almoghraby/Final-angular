@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Create New Course</h2>
+<mat-dialog-content class="mat-typography">
+ 
+    
+  <form class="example-form" [formGroup]="createServices">
+    
+     <mat-label>Services Image Icon</mat-label>
+      <input type="file" #file formControlName="image" (change)="uploadImg(file.files)" >
+      <br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Services Title</mat-label>
+        <input type="text" matInput formControlName="textt" >
+        <mat-error *ngIf="createServices.controls['textt'].hasError('required')">
+            Services Title is required
+        </mat-error>
+      </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+        <mat-label>Services Description</mat-label>
+        <input type="text" matInput formControlName="textd" >
+        <mat-error *ngIf="createServices.controls['textd'].hasError('required')">
+            Description  is required
+        </mat-error>
+        </mat-form-field>
+    <br>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button (click)="save()" [mat-dialog-close]="true" cdkFocusInitial> Save</button>
+</mat-dialog-actions>

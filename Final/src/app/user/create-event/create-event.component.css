@@ -1,0 +1,20 @@
+.colorbut{
+    border: 1px solid var(--primary-color) !important;
+    border-radius: var(--border-radius);
+    font-weight: 70;
+    background: var(--primary-color) !important ;
+    color: white !important;
+  }
+  .btn-outline-primary {
+    border-color: #26B4FF;
+    background: transparent;
+    color: #26B4FF;
+}
+
+.im{
+  margin: 0 auto;
+   width: 300px; 
+   height: 150px; 
+   border-radius: 25px; 
+   margin-bottom: 20px;
+}

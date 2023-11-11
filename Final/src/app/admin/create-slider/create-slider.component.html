@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Create Category</h2>
+<mat-dialog-content class="mat-typography">
+  
+    <form  [formGroup]="createSlier" class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Title </mat-label>
+          <input type="text" matInput formControlName="textt">
+          <mat-error *ngIf="createSlier.controls['textt'].hasError('required')&& 
+          createSlier.controls['textt']?.touched" class="text-danger">
+            Title is required
+          </mat-error>
+        </mat-form-field>
+       
+        <br>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>body </mat-label>
+          <input type="text" matInput formControlName="textp">
+          <mat-error *ngIf="createSlier.controls['textp'].hasError('required') && 
+          createSlier.controls['textp']?.touched" class="text-danger">
+            body is required
+          </mat-error>
+        </mat-form-field>
+        <br>
+ 
+     <input type="file" #file formControlName="image" (change)="UploadImage(file.files)">
+
+
+      </form>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" [disabled]="!createSlier.valid" cdkFocusInitial (click)="createSlider()">Save</button>
+</mat-dialog-actions>

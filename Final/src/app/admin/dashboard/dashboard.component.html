@@ -1,0 +1,277 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+<!-- End Header -->
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section dashboard">
+    <div class="row">
+
+      <!-- Left side columns -->
+      <div class="col-lg-8">
+        <div class="row">
+
+          <!-- Sales Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card sales-card">
+
+              <div class="card-body">
+                <h3 class="card-title">Number of Users <br><span>Users Regiestered</span></h3>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-people"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{lengthuser}}</h6>
+                    <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Sales Card -->
+
+          <!-- Revenue Card -->
+          <div class="col-xxl-4 col-md-6">
+            <div class="card info-card revenue-card">
+
+              <div class="card-body">
+                <h3 class="card-title">Number of Event <br><span>All Active Event</span></h3>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-currency-dollar"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{lengthevets}}</h6>
+                    <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- End Revenue Card -->
+
+          <!-- Customers Card -->
+          <div class="col-xxl-4 col-md-6">
+
+            <div class="card info-card customers-card">
+
+              <div class="card-body">
+                <h3 class="card-title">Max Event Registered <br><span>{{maxeventregistered?.name}}</span></h3>
+
+                <div class="d-flex align-items-center">
+                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="bi bi-people"></i>
+                  </div>
+                  <div class="ps-3">
+                    <h6>{{nummaxregisterd}}</h6>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div><!-- End Customers Card -->
+
+          <!-- Reports -->
+          <div class="col-12">
+            <div class="card">
+
+              <div class="card-body">
+                <h3 class="card-title">Reports <span>/ for Recent 7 Events</span></h3>
+
+                <table class="table table-striped" style="width: 100%;">
+                  <thead>
+                    <tr>
+                      <th id="thh" scope="col"> name</th>
+                      <th id="thh" scope="col">startdate</th>
+                      <th id="thh" scope="col">enddate</th>
+                      <th id="thh" scope="col">phone</th>
+                      <th id="thh" scope="col">category</th>
+                      <th id="thh" scope="col">Attends</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                    <tr *ngFor="let e of admin.events.slice(0,7)">
+                      <td>{{e?.name}}</td>
+                      <td>{{e?.startdate |date:'shortDate'}}</td>
+                      <td>{{e?.enddate |date:'shortDate'}}</td>
+                      <td>{{e?.phone}}</td>
+                      <td>{{getcategorybyid(e.categoryid)?.name}}</td>
+                      <td>{{getnumberregister(e.eventid)}}  /  {{e.limitattend}}</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div><!-- End Reports -->
+
+          <!-- Recent Sales -->
+          <div class="col-12">
+            <div class="card recent-sales overflow-auto">
+
+              <div class="card-body">
+                <h3 class="card-title">Rating Website<span>| Recent 8</span></h3>
+
+                <table class="table table-borderless datatable">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">UserName</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Rate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let obj of  guest.reviews.slice(0,8); let num = index">
+                      <th>{{num + 1}}</th>
+                      <td>{{getuserbyid(obj.userid)?.username}}</td>
+                      <td><a href="mailto:{{getuserbyid(obj.userid)?.email}}" class="text-primary">{{getuserbyid(obj.userid)?.email}}</a></td>
+                      <td *ngIf="obj.reviewvalue == 5"><span class="badge bg-success">Perfecto</span></td>
+                      <td *ngIf="obj.reviewvalue == 4"><span class="badge bg-primary">Excellent</span></td>
+                      <td *ngIf="obj.reviewvalue == 3"><span class="badge bg-secondary">Very Good</span></td>
+                      <td *ngIf="obj.reviewvalue == 2"><span class="badge bg-warning">Good</span></td>
+                      <td *ngIf="obj.reviewvalue == 1"><span class="badge bg-danger">Bad</span></td>
+                    </tr>                   
+                  </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div><!-- End Recent Sales -->
+
+          <!-- Top Selling -->
+          <div class="col-lg-12 ">
+            <div class="card top-selling overflow-auto">
+              <div class="card-body pb-0">
+                <h3 class="card-title">Statistics</h3>
+               
+                <div id="chart" class="chart">
+                  <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions"
+                    [plugins]="pieChartPlugins">
+                  </canvas>
+                </div>
+
+              </div>
+
+            </div>
+          </div><!-- End Top Selling -->
+
+        </div>
+      </div><!-- End Left side columns -->
+
+
+
+      
+
+
+
+      <!-- Right side columns -->
+      <div class="col-lg-4">
+
+        <!-- Recent Activity -->
+        <div class="card">       
+          <div class="card-body">
+            <h3 class="card-title">Recent Events </h3>
+
+            <div class="activity">
+
+              <div class="activity-item d-flex" *ngFor="let item of sortevents.slice(0,10)">
+                <div class="activite-label" *ngIf="getdeffrentdate(item.createddate) != 0">{{getdeffrentdate(item.createddate)}} days </div>
+                <div class="activite-label" *ngIf="getdeffrentdate(item.createddate) == 0">Today</div>
+                <i class='bi bi-circle-fill activity-badge text-success align-self-start' *ngIf="getdeffrentdate(item.createddate) <= 5"></i>
+                <i class='bi bi-circle-fill activity-badge text-primary align-self-start' *ngIf="getdeffrentdate(item.createddate) <= 15 && 
+                getdeffrentdate(item.createddate) > 5"></i>
+                <i class='bi bi-circle-fill activity-badge text-warning align-self-start' *ngIf="getdeffrentdate(item.createddate) <= 25 && 
+                getdeffrentdate(item.createddate) > 15"></i>
+                <i class='bi bi-circle-fill activity-badge text-danger align-self-start' *ngIf="getdeffrentdate(item.createddate) > 25"></i>
+                <div class="activity-content">
+                   <a style="text-decoration: none;" class="fw-bold text-dark">{{item.name}}</a>
+                </div>
+              </div><!-- End activity item-->
+
+            </div>
+
+          </div>
+        </div><!-- End Recent Activity -->
+
+        
+
+        
+
+        <!-- News & Updates Traffic -->
+        <div class="card">
+          
+
+          <div class="card-body pb-0">
+            <h5 class="card-title">Statistics <span>| Registers</span></h5>
+
+            <div id="chart" class="chart">
+              <canvas baseChart [data]="pieChartData2" [type]="pieChartType2" [options]="pieChartOptions2"
+                [plugins]="pieChartPlugins2">
+              </canvas>
+            </div>
+
+          </div>
+        </div><!-- End News & Updates -->
+
+      </div><!-- End Right side columns -->
+
+    </div>
+  </section>
+  <div class="theme-layout" style="margin-left:300px ;">
+
+    <section>
+      <div class="gap gray-bg">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row merged20" id="page-contents">
+
+
+                <div class="row">
+                  <div class="col-lg-3">
+
+
+                    <!-- ********************************************************** -->
+
+                    <div>
+                      <div>
+
+                      </div>
+                    </div>
+
+
+                    <!-- ************************************************************************** -->
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
